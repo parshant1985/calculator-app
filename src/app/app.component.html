@@ -101,6 +101,8 @@
       <span class="input-group-text" id="basic-addon1">Area: {{item.width*item.length}} sq ft.</span>
       <span class="input-group-text" id="basic-addon1">Amout: {{item.width*item.length*item.price}} Rs</span>
       <span class="input-group-text" id="basic-addon1">Box: {{item.box}}</span>
+      <span class="input-group-text" id="basic-addon1"><button class="btn btn-danger"
+          (click)="remove(idnum())">X</button></span>
     </div>
   </div>
 </div>

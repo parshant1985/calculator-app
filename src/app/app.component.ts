@@ -65,8 +65,13 @@ export class AppComponent {
 
   }
 
-  updaterow(id: any, val: any) {
+  remove(id: any) {
+    this.idnum.update((i: any) => i - 1)
+    console.log(id)
+    this.addRow.update((item: any) => item.filter((itm: any) => {
+      return itm.id !== id
 
+    }));
   }
   size(e: any, id: any) {
     // console.log(id, e)
@@ -79,9 +84,10 @@ export class AppComponent {
   area = computed(() => (this.widthSize() * this.lengthSize()))
   noofbox = computed(() => Math.ceil((this.area() / this.box())))
   total = computed(() => (this.widthSize() * this.lengthSize()) * this.price())
-  idnum: any = 0
+  idnum: any = signal(0)
   addrowfn() {
-    this.addRow.update((item => ([...item, { id: ++this.idnum, width: 10, length: 10, price: 35, size: 'size', box: 7 }])))
+    this.idnum.update((i: any) => i + 1)
+    this.addRow.update((item => ([...item, { id: this.idnum(), width: 10, length: 10, price: 35, size: 'size', box: 7 }])))
   }
 
   cc = effect(() => console.log(this.addRow()))
