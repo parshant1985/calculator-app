@@ -1,0 +1,106 @@
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+  <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+    aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+    <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+      <use href="#sun-fill"></use>
+    </svg>
+    <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+    <li>
+      <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light"
+        aria-pressed="true">
+        <svg class="bi me-2 opacity-50" width="1em" height="1em">
+          <use href="#sun-fill"></use>
+        </svg>
+        Light
+        <svg class="bi ms-auto d-none" width="1em" height="1em">
+          <use href="#check2"></use>
+        </svg>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+        aria-pressed="false">
+        <svg class="bi me-2 opacity-50" width="1em" height="1em">
+          <use href="#moon-stars-fill"></use>
+        </svg>
+        Dark
+        <svg class="bi ms-auto d-none" width="1em" height="1em">
+          <use href="#check2"></use>
+        </svg>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
+        aria-pressed="false">
+        <svg class="bi me-2 opacity-50" width="1em" height="1em">
+          <use href="#circle-half"></use>
+        </svg>
+        Auto
+        <svg class="bi ms-auto d-none" width="1em" height="1em">
+          <use href="#check2"></use>
+        </svg>
+      </button>
+    </li>
+  </ul>
+</div>
+
+
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><button class="btn btn-success" type="submit">Total
+          Price:{{totalCompute()}} Rs</button></a>
+      <button class="btn button btn-outline-success" (click)="addrowfn()">+Add</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+
+
+        </ul>
+        <form class="d-flex" role="search">
+
+          <button class="btn btn-info" type="submit">Total Box: {{totalbox()
+            }}</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="container-fluid mt-5 pt-5">
+
+  <div class="container-fluid pb-4">
+  </div>
+  <div class="col-md-12 ">
+
+    <div class="input-group mb-3  p-4 bg-body-tertiary border rounded-3" *ngFor="let item of addRow(); let i = index">
+      <span class="input-group-text" id="basic-addon1">{{i+1}}</span>
+      <input type="text" class="form-control" value="" placeholder="product" aria-label="Username">
+      <input type="number" class="form-control" value="{{item.width}}" (change)="areacal($event, 'width', i+1)"
+        placeholder="width" aria-label="Username">
+      <span class="input-group-text">x</span>
+      <input type="number" class="form-control" value="{{item.length}}" (change)="areacal($event, 'length',i+1)"
+        placeholder="length" aria-label="Server">
+
+      <input type="number" class="form-control" value="{{item.price}}" (change)="areacal($event, 'price',i+1)"
+        placeholder="price" aria-label="Server"><select class="form-select" value="{{boxsize()}}"
+        (change)="size($event,  i+1)" aria-label="Default select example">
+        <option selected>size</option>
+        <option value="16">4x2</option>
+        <option value="8">2x2</option>
+
+      </select>
+
+
+      <span class="input-group-text" id="basic-addon1">Area: {{item.width*item.length}} sq ft.</span>
+      <span class="input-group-text" id="basic-addon1">Amout: {{item.width*item.length*item.price}} Rs</span>
+      <span class="input-group-text" id="basic-addon1">Box: {{item.box}}</span>
+    </div>
+  </div>
+</div>

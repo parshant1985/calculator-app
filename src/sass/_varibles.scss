@@ -1,0 +1,11 @@
+$color: rgb(224, 36, 102);
+
+$color_den: (
+    'primary':rgb(36, 89, 224),
+    'secondary':rgb(91, 11, 145),
+    'info':rgb(238, 209, 18),
+
+);
+
+
+@debug map-get($color_den , 'info');
