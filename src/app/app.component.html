@@ -42,7 +42,7 @@
           <span class="input-group-text">x</span>
           <input type="number" class="form-control" value="{{item.length}}" (change)="areacal($event, 'length',i+1)"
             placeholder="length" aria-label="Server">
-          <button type="button" class="btn btn-success">{{item.box}}</button>
+          <button type="button" class="btn btn-success">Box:{{item.box}} </button>
         </div>
 
 
@@ -50,8 +50,8 @@
       </div>
       <div class="card-footer text-body-secondary">
         <strong style="color:rgb(12, 176, 37)">{{item.width*item.length}} sq ft.</strong> | Rs: <span
-          style="color:rgb(12, 176, 37)"><strong>{{item.width*item.length*item.price}}</strong></span> | Box:
-        <strong style="color:rgb(12, 176, 37)">{{item.box}}</strong>
+          style="color:rgb(12, 176, 37)"><strong>{{item.width*item.length*item.price}}</strong></span>
+
       </div>
     </div>
 
@@ -96,7 +96,7 @@
         </table>
       </div>
       <div class="modal-footer">
-
+        <button type="button" class="btn btn-danger">Total Box: {{totalbox()}}</button>
         <button type="button" class="btn btn-success">{{totalCompute()}} Rs.</button>
 
       </div>
