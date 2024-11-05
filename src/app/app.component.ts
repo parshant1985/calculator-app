@@ -21,7 +21,7 @@ export class AppComponent {
   colorProp: string = 'red';
   intialId: number = 1001;
   initialValue: any = [];
-
+  isShow: boolean = false
 
 
 
@@ -31,13 +31,15 @@ export class AppComponent {
   price = signal(35)
   box = signal(1)
   addRow: WritableSignal<any[]> = signal<any[]>([]);
+  tileName: any = [{ name: 'Astetic Grey ', box: 23, id: 1 }, { name: 'Beige Brown', box: 25, id: 2 }, { name: 'Black Blue', box: 125, id: 3 }, { name: 'Golden Base', box: 26, id: 4 }, { name: 'Wooden Grey', box: 36, id: 5 }, { name: 'Armani Gold', box: 66, id: 6 }]
   constructor(private cd: ChangeDetectorRef) { }
   markForCheck() {
     this.cd.markForCheck();
   }
+  pendingTile = signal(this.tileName)
 
   areacal(val: any, ch: any, id: any) {
-    console.log(id)
+
     if (ch == 'width') {
       this.widthSize.set(+val.target.value);
       this.addRow.update((item: any) => item.map((itm: any) => {
@@ -59,6 +61,13 @@ export class AppComponent {
       this.price.set(+val.target.value);
       this.addRow.update((item: any) => item.map((itm: any) => {
         return (itm.id == id) ? { ...itm, price: +val.target.value } : itm
+
+      }));
+    }
+
+    if (ch == 'tile') {
+      this.addRow.update((item: any) => item.map((itm: any) => {
+        return (itm.id == id) ? { ...itm, name: val.target.value } : itm
 
       }));
     }
@@ -90,6 +99,10 @@ export class AppComponent {
     this.addRow.update((item => ([...item, { id: this.idnum(), width: 10, length: 10, price: 35, size: 'size', box: 7 }])))
   }
 
+  selectiles(e: any) {
+    const numval = e.target.value;
+    console.log(numval)
+  }
   cc = effect(() => console.log(this.addRow()))
 
 
