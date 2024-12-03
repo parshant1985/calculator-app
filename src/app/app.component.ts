@@ -9,19 +9,21 @@ import { single } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe, JsonPipe, CommonModule],
+  imports: [ CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'resto';
+  title = 'Tile Caluclator';
   food$: any;
   subtotal = signal(0);
   orderplaced: boolean = false;
   colorProp: string = 'red';
   intialId: number = 1001;
   initialValue: any = [];
-  isShow: boolean = false
+  isShow: boolean = false;
+  customerName = <any>signal('');
+  mobile = <any>signal(0)
 
 
 
@@ -37,7 +39,15 @@ export class AppComponent {
     this.cd.markForCheck();
   }
   pendingTile = signal(this.tileName)
-
+  reset() {
+    this.addRow.set([])
+  }
+  customerNameFN(val:any) {
+    this.customerName.set(val.target.value);
+  }
+  MobileFN(val:any) {
+    this.mobile.set(val.target.value);
+  }
   areacal(val: any, ch: any, id: any) {
 
     if (ch == 'width') {
@@ -71,6 +81,12 @@ export class AppComponent {
 
       }));
     }
+    if (ch == 'box') {
+      this.addRow.update((item: any) => item.map((itm: any) => {
+        return (itm.id == id) ? { ...itm, box: +val.target.value } : itm
+
+      }));
+    }
 
   }
 
@@ -90,7 +106,7 @@ export class AppComponent {
 
     }));
   }
-  area = computed(() => (this.widthSize() * this.lengthSize()))
+  area = computed(() => (this.widthSize() * this.lengthSize())+10)
   noofbox = computed(() => Math.ceil((this.area() / this.box())))
   total = computed(() => (this.widthSize() * this.lengthSize()) * this.price())
   idnum: any = signal(0)
@@ -107,10 +123,10 @@ export class AppComponent {
 
 
   totalCompute = computed(() => this.addRow().reduce((acc: any, itm: any) => {
-    return acc + itm.width * itm.length * itm.price
+    return acc + itm.box* 16 * itm.price
   }, 0))
   totalbox = computed(() => this.addRow().reduce((acc: any, itm: any) => {
-    return acc + itm.box
+    return acc + itm.box 
   }, 0))
 
 
