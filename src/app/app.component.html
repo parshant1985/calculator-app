@@ -2,28 +2,28 @@
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><button class="btn btn-success" type="submit">{{totalCompute()}} Rs</button></a>
-      <button class="btn button btn-outline-success" (click)="addrowfn()" style="font-size: 18px;">+</button>
-      <button class="btn button btn-outline-success" (click)="reset()">R</button>
-      <button class="btn button btn-outline-success" (click)="isShow =true">Detail</button>
+      <button class="btn btn-success  btn-sm" type="submit">{{totalCompute()}} Rs</button>
+      <button class="btn button btn-outline-success  btn-sm" (click)="addrowfn()">+</button>
+      <button class="btn button btn-outline-success  btn-sm" (click)="reset()">R</button>
+      <button class="btn button btn-outline-success  btn-sm" (click)="isShow =true">Detail</button>
       <button class="btn btn-info" type="submit"> Box: {{totalbox()
         }}</button>
 
     </div>
   </nav>
 </header>
+
 <div class="container-fluid mt-5 pt-5">
 
-  <div class="container-fluid pb-4">
-    <div class="d-flex">
-      <div class="col-md-6 p-3"> <label> Name</label>
-        <input type="text" class="form-control" placeholder="Customer Name" (change)="customerNameFN($event)" /></div>
-      <div class="col-md-6 p-3"><label> Contact</label>
-        <input type="tel" minlength="10" maxlength="10"  class="form-control" placeholder="Mobile" (change)="MobileFN($event)" /></div>
-    </div>
-   
-   
-  </div>
+  <div class="col-md-12 ">
+    <div class="d-flex gap-2">
+  
+        <input type="text" class="form-control" [value]="customerName()" placeholder="Customer Name" (change)="customerNameFN($event)" />
+      
+        <input type="tel" minlength="10" maxlength="10" [value]="mobile()"  class="form-control" placeholder="Mobile" (change)="MobileFN($event)" />
+      </div>
+
+  
   <div class="col-md-12 ">
     <div class="card mt-3 mb-3 text-center d-sm-block " *ngFor="let item of addRow(); let i = index">
       <div class="card-header">
@@ -77,7 +77,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><span style="color: brown;"> {{customerName()}}</span> <span style="color: rgb(19, 170, 11);">-{{mobile()}}</span></h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><span style="color: brown;"> {{customerName() ? customerName():'No Name'}}</span> <span style="color: rgb(19, 170, 11);">-{{mobile()?mobile():'No Contact'}}</span></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="isShow=false"
           aria-label="Close"></button>
       </div>
@@ -107,6 +107,7 @@
           </tbody>
         </table>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-danger">Total Box: {{totalbox()}}</button>
         <button type="button" class="btn btn-success">{{totalCompute()}} Rs.</button>
@@ -114,4 +115,5 @@
       </div>
     </div>
   </div>
+ 
 </div>

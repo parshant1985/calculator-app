@@ -23,7 +23,7 @@ export class AppComponent {
   initialValue: any = [];
   isShow: boolean = false;
   customerName = <any>signal('');
-  mobile = <any>signal(0)
+  mobile = <any>signal('')
 
 
 
@@ -33,14 +33,16 @@ export class AppComponent {
   price = signal(35)
   box = signal(1)
   addRow: WritableSignal<any[]> = signal<any[]>([]);
-  tileName: any = [{ name: 'Astetic Grey ', box: 23, id: 1 }, { name: 'Beige Brown', box: 25, id: 2 }, { name: 'Black Blue', box: 125, id: 3 }, { name: 'Golden Base', box: 26, id: 4 }, { name: 'Wooden Grey', box: 36, id: 5 }, { name: 'Armani Gold', box: 66, id: 6 }]
+  
   constructor(private cd: ChangeDetectorRef) { }
   markForCheck() {
     this.cd.markForCheck();
   }
-  pendingTile = signal(this.tileName)
+ 
   reset() {
-    this.addRow.set([])
+    this.addRow.set([]);
+    this.mobile.set('');
+    this.customerName.set('')
   }
   customerNameFN(val:any) {
     this.customerName.set(val.target.value);
