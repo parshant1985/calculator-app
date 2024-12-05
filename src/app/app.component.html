@@ -6,7 +6,7 @@
       <button class="btn button btn-outline-success  btn-sm" (click)="addrowfn()">+</button>
       <button class="btn button btn-outline-success  btn-sm" (click)="reset()">R</button>
       <button class="btn button btn-outline-success  btn-sm" (click)="isShow =true">Detail</button>
-      <button class="btn btn-info" type="submit"> Box: {{totalbox()
+      <button class="btn btn-info btn-sm" type="submit"> Box: {{totalbox()
         }}</button>
 
     </div>
@@ -84,7 +84,7 @@
       <div class="modal-body">
         <table class="table table-striped">
           <thead>
-            <tr>
+            <tr style="font-size: 13px;">
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Box</th>
@@ -94,7 +94,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of addRow(); let i = index">
+            <tr *ngFor="let item of addRow(); let i = index" style="font-size: 12px !important;">
               <th scope="row">{{i+1}}</th>
               <td>{{item.name?item.name:'no-name'}}</td>
               <td>{{item.box}}</td>
