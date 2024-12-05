@@ -1,0 +1,119 @@
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <button class="btn btn-success  btn-sm" type="submit">{{totalCompute()}} Rs</button>
+      <button class="btn button btn-outline-success  btn-sm" (click)="addrowfn()">+</button>
+      <button class="btn button btn-outline-success  btn-sm" (click)="reset()">R</button>
+      <button class="btn button btn-outline-success  btn-sm" (click)="isShow =true">Detail</button>
+      <button class="btn btn-info btn-sm" type="submit"> Box: {{totalbox()
+        }}</button>
+
+    </div>
+  </nav>
+</header>
+
+<div class="container-fluid mt-5 pt-5">
+
+  <div class="col-md-12 ">
+    <div class="d-flex gap-2">
+  
+        <input type="text" class="form-control" [value]="customerName()" placeholder="Customer Name" (change)="customerNameFN($event)" />
+      
+        <input type="tel" minlength="10" maxlength="10" [value]="mobile()"  class="form-control" placeholder="Mobile" (change)="MobileFN($event)" />
+      </div>
+
+  
+  <div class="col-md-12 ">
+    <div class="card mt-3 mb-3 text-center d-sm-block " *ngFor="let item of addRow(); let i = index">
+      <div class="card-header">
+        <div class="d-flex justify-content-evenly gap-2"><button class="btn btn-success">{{i+1}}</button>
+
+
+
+          <input type="text" class="form-control" placeholder="Tile Name" value="{{item.name}}"
+            (change)="areacal($event, 'tile',i+1)">
+
+          <input type="number" class="form-control" value="{{item.price}}" (change)="areacal($event, 'price',i+1)"
+            placeholder="price" aria-label="Server">
+
+
+
+
+          <button class="btn btn-danger" (click)="remove(idnum())">X</button>
+        </div>
+
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between"><label>Enter Area</label>     <label> box: </label></div>
+      
+        <div class="d-flex gap-2 justify-content-evenly pt-2 mb-2"><input type="number" class="form-control"
+            value="{{item.width}}" (change)="areacal($event, 'width', i+1)" placeholder="width" aria-label="Username">
+          <span class="input-group-text">x</span>
+          <input type="number" class="form-control" value="{{item.length}}" (change)="areacal($event, 'length',i+1)"
+            placeholder="length" aria-label="Server">
+        <input type="number" class="form-control" value="{{item.box}}" (change)="areacal($event, 'box',i+1)"
+            placeholder="Box" aria-label="Server">
+         
+        </div>
+
+
+
+      </div>
+      <div class="card-footer text-body-secondary">
+        <strong style="color:rgb(12, 176, 37)">{{item.width*item.length}} sq ft.</strong> | Rs: <span
+          style="color:rgb(12, 176, 37)"><strong>{{16*item.box*item.price}}</strong></span>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Modal -->
+
+<div *ngIf="isShow" class="modal d-block " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><span style="color: brown;"> {{customerName() ? customerName():'No Name'}}</span> <span style="color: rgb(19, 170, 11);">-{{mobile()?mobile():'No Contact'}}</span></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="isShow=false"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr style="font-size: 13px;">
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Box</th>
+              <th scope="col">Price</th>
+              <th scope="col">Area</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of addRow(); let i = index" style="font-size: 12px !important;">
+              <th scope="row">{{i+1}}</th>
+              <td>{{item.name?item.name:'no-name'}}</td>
+              <td>{{item.box}}</td>
+              <td>{{item.price}}</td>
+              <td>{{item.width*item.length}}sq ft.</td>
+              <td>{{item.box*16*item.price}}</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">Total Box: {{totalbox()}}</button>
+        <button type="button" class="btn btn-success">{{totalCompute()}} Rs.</button>
+
+      </div>
+    </div>
+  </div>
+ 
+</div>
